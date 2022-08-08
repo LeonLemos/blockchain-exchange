@@ -20,7 +20,7 @@ describe('Token',()=>{
         const name = 'My Token'
         const symbol = 'DAPP'
         const decimals = 18
-        const totalSupply = 1000000
+        const totalSupply = tokens(1000000).toString()
 
         it('has correct name', async ()=>{
             //Read Token info(name) from the deployed instance and check that name is correct
@@ -39,7 +39,7 @@ describe('Token',()=>{
     
         it('has correct totalSupply', async ()=>{
             //Read Token info(supply) from the deployed instance and check that symbol is correct
-            expect(tokens(await token.totalSupply()).toString()).to.equal(tokens(totalSupply).toString()) 
+            expect(tokens(await token.totalSupply()).toString()).to.equal(totalSupply) 
         })
 
     })
