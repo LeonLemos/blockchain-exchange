@@ -11,6 +11,7 @@ contract Token {
 
     //Track Balance
     mapping(address=>uint256) public balanceOf;
+    mapping(address=> mapping ( address => uint256))public allowance; //Create mapping to approve allowances to spenders.
 
     //Create Transfer event
     event Transfer(
@@ -18,6 +19,13 @@ contract Token {
         address indexed to, 
         uint256 value
     );
+
+    //Create Approval event
+    event Approval(
+        address indexed owner,
+        address indexed spender, 
+        uint256 value
+    ); 
     
     constructor(
         string memory _name, 
@@ -37,11 +45,18 @@ contract Token {
         //Require that sender has enough token to spend
         require(balanceOf[msg.sender] >= _value);
 
+        _transfer(msg.sender, _to, _value);
+        
+        return true;
+    }
+
+    function _transfer(address _from, address _to, uint256 _value ) internal {
+
         //Not allow burning tokens
         require(_to != address(0));
-
+        
         //Deduct tokens from spender
-        balanceOf[msg.sender] = balanceOf[msg.sender] - _value; 
+        balanceOf[_from] = balanceOf[_from] - _value; 
 
         //Credit tokens to receiver
         balanceOf[_to] = balanceOf[_to] + _value; 
@@ -49,7 +64,35 @@ contract Token {
         //Emit transfer Event
         emit Transfer(msg.sender, _to, _value);
 
+
+    }
+
+    function approve(
+        address _spender, 
+        uint256 _value) 
+        public 
+        returns (bool success)
+    {
+        require(_spender != address(0)); //0 address cannot be spender
+
+        allowance[msg.sender][_spender]=_value;
+
+        emit Approval(msg.sender, _spender, _value);
+
         return true;
     }
+
+    function transferFrom(
+        address _from, 
+        address _to, 
+        uint256 _value) 
+        public 
+        returns ( bool success) 
+    {
+
+
+
+    }
 }
+
 
