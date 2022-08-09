@@ -11,7 +11,7 @@ contract Token {
 
     //Track Balance
     mapping(address=>uint256) public balanceOf;
-    mapping(address=> mapping ( address => uint256))public allowance; //Create mapping to approve allowances to spenders.
+    mapping(address=> mapping ( address => uint256)) public allowance; //Create mapping to approve allowances to spenders.
 
     //Create Transfer event
     event Transfer(
@@ -46,7 +46,7 @@ contract Token {
         require(balanceOf[msg.sender] >= _value);
 
         _transfer(msg.sender, _to, _value);
-        
+
         return true;
     }
 
@@ -62,7 +62,7 @@ contract Token {
         balanceOf[_to] = balanceOf[_to] + _value; 
 
         //Emit transfer Event
-        emit Transfer(msg.sender, _to, _value);
+        emit Transfer(_from, _to, _value);
 
 
     }
@@ -89,8 +89,17 @@ contract Token {
         public 
         returns ( bool success) 
     {
+        //Check if spender has been approved to spend by owner
+        require(balanceOf[_from] >= _value);  
+        require(allowance[_from][msg.sender] >= _value) ;
+       
+       //Reset allowance to prevent double spend or unwanted spending
+        allowance[_from][msg.sender] = allowance[_from][msg.sender] - _value;
 
+        //Spend Tokens
+        _transfer((_from), _to, _value);
 
+        return true;
 
     }
 }
