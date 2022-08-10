@@ -91,7 +91,7 @@ contract Token {
     {
         //Check if spender has been approved to spend by owner
         require(balanceOf[_from] >= _value);  
-        require(allowance[_from][msg.sender] >= _value) ;
+        require(allowance[_from][msg.sender] >= _value);
        
        //Reset allowance to prevent double spend or unwanted spending
         allowance[_from][msg.sender] = allowance[_from][msg.sender] - _value;
