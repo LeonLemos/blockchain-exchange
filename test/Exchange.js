@@ -362,7 +362,7 @@ describe('Exchange', ()=>{
                 })
             })
 
-            describe('Failure', async()=>{
+            describe('Failure', ()=>{
 
                 it('Rejects invalid order ids', async()=>{
                     const invalidOrderId = 99999
