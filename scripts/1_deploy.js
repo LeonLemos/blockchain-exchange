@@ -15,7 +15,7 @@ async function main() {
   await ethers.getSigners()
 
   // Deploy contracts
-  const dapp = await Token.deploy('My Token','DAPP', 1000000)
+  const dapp = await Token.deploy('Dapp','DAPP', 1000000)
   await dapp.deployed()
   console.log(`Dapp Deployed to: ${dapp.address}`)
 

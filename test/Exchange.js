@@ -16,7 +16,7 @@ describe('Exchange', ()=>{
         const Token = await ethers.getContractFactory('Token') 
 
         //Deploy contract to the Blockchain
-        token1 = await Token.deploy('My Token', 'DAPP', 1000000) 
+        token1 = await Token.deploy('Dapp', 'DAPP', 1000000) 
         token2 = await Token.deploy('Mock Dai', 'mDAI', 1000000) 
 
         //Fetch the Accounts

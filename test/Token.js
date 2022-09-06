@@ -13,7 +13,7 @@ describe('Token',()=>{
         const Token = await ethers.getContractFactory('Token')  
 
         //Deploy contract to the Blockchain
-        token = await Token.deploy('My Token','DAPP', 1000000) 
+        token = await Token.deploy('Dapp','DAPP', 1000000) 
 
         //Fetch the Accounts
         accounts = await ethers.getSigners()
