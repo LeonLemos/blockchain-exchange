@@ -10,14 +10,13 @@ const Markets = () => {
     const dispatch = useDispatch()
 
     const marketHandler = async (e) => {
-        loadTokens(provider, (e.target.value).split(','), dispatch )
+        loadTokens(provider, (e.target.value).split(','), dispatch)
     }
 
     return(
       <div className='component exchange__markets'>
         <div className='component__header'>
             <h2>Select Market</h2>
-  
         </div>
 
         {chainId && config[chainId] ? (
