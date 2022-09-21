@@ -42,7 +42,7 @@ const Balance = () => {
 
     const amountHandler = (e, token) => {
         if (token.address === tokens[0].address) {
-            setToken1TransferAmount(e.target.value)
+          setToken1TransferAmount(e.target.value)
         } else {
           setToken2TransferAmount(e.target.value)
         }
